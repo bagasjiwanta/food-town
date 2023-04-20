@@ -44,3 +44,10 @@ export const getRestaurantDetails = async (restaurantId: string) => {
 `
   return await client.fetch<TRestaurant>(query, { restaurantId: restaurantId })
 }
+
+export const getCategoryRestaurant = async (categoryId: string, foodcourtId: string) => {
+  const query = 
+`
+
+`
+}

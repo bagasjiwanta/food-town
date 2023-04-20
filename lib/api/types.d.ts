@@ -4,7 +4,7 @@ export type TCategory = {
   image: string
 }
 
-export type TFoodCourt = {
+export type TFoodcourt = {
   id: string,
   name: string,
   location: {
@@ -36,6 +36,6 @@ export type TFeatured = {
   id: string,
   name: string,
   description: string,
-  foodcourt: TFoodCourt,
+  foodcourt: TFoodcourt,
   restaurants: TRestaurant[]
 }

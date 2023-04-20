@@ -1,5 +1,5 @@
 import { client } from "./client"
-import { TFoodCourt } from "./types"
+import { TFoodcourt } from "./types"
 
 export const getFoodcourts = async () => {
   const query = 
@@ -10,5 +10,5 @@ export const getFoodcourts = async () => {
   "id": id.current
 }
 `
-  return await client.fetch<TFoodCourt[]>(query)
+  return await client.fetch<TFoodcourt[]>(query)
 }
