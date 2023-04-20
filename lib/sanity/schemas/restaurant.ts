@@ -28,6 +28,15 @@ export default defineType({
       validation: Rule => Rule.required()
     }),
     defineField({
+      name: 'rating',
+      title: 'Rating',
+      type: 'number',
+      validation: Rule => Rule
+        .required()
+        .max(5)
+        .min(0)
+    }),
+    defineField({
       name: 'coverimage',
       title: 'Cover Image',
       type: 'image',

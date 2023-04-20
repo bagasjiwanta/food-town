@@ -28,6 +28,13 @@ export default defineType({
       validation: Rule => Rule.required()
     }),
     defineField({
+      name: 'foodcourt',
+      title: 'Food Court',
+      type: 'reference',
+      to: [{ type: 'foodcourt' }],
+      validation: Rule => Rule.required()
+    }),
+    defineField({
       name: 'restaurants',
       title: 'Restaurants',
       type: 'array',

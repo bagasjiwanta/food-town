@@ -12,16 +12,6 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
-      name: 'id',
-      title: 'Menu Id',
-      type: 'slug',
-      options: {
-        source: 'name',
-        maxLength: 96
-      },
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
       name: 'description',
       title: 'Short Description',
       type: 'string',
