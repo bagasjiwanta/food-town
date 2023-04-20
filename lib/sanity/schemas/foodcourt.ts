@@ -1,28 +1,30 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'category',
-  title: 'Category',
+  name: 'foodcourt',
+  title: 'Food Court',
   type: 'document',
   fields: [
     defineField({
       name: 'name',
       title: 'Name',
       type: 'string',
+      validation: Rule => Rule.required()
     }),
     defineField({
       name: 'id',
-      title: 'Category Id',
+      title: 'Food Court Id',
       type: 'slug',
       options: {
         source: 'name',
-        maxLength: 96
-      }
+        maxLength: 96,
+      },
+      validation: Rule => Rule.required()
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
+      name: 'location',
+      title: 'Location',
+      type: 'geopoint',
       validation: Rule => Rule.required()
     }),
   ],
