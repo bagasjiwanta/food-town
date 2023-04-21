@@ -30,7 +30,7 @@ export default function App() {
     Poppins_500Medium_Italic,
     Poppins_600SemiBold,
     Poppins_600SemiBold_Italic,
-    Poppins_700Bold,
+    "Poppins_700Bold": Poppins_700Bold,
     Poppins_700Bold_Italic,
   })
 

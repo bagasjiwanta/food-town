@@ -1,18 +1,22 @@
-import { SafeAreaView, View } from 'react-native'
+import { SafeAreaView, View, Text} from 'react-native'
 import HomeHeader from '../components/HomeHeader'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import Categories from '../components/Categories'
+import { useFoodcourt } from '../components/FoodcourtProvider'
+import { font } from '../lib/utils/fontBuilder'
 
 const HomeScreen = ({
   navigation,
 }: {
   navigation: NativeStackNavigationProp<any>
 }) => {
-  console.log('hello')
+  const {foodcourt} = useFoodcourt()
   return (
-    <SafeAreaView className="pt-10 px-2">
+    <SafeAreaView className="pt-7">
       <HomeHeader />
-      <Categories navigation={navigation} />
+      {
+        foodcourt ? <Categories navigation={navigation} /> : null
+      }
     </SafeAreaView>
   )
 }
