@@ -3,7 +3,7 @@ import { TFeatured } from './types'
 
 export const getFoodCourtFeatured = async (foodcourt: string) => {
   const query = `
-*[
+  *[
     _type == 'featured' 
     && foodcourt->id.current == $foodcourt
   ] {
@@ -14,9 +14,12 @@ export const getFoodCourtFeatured = async (foodcourt: string) => {
       name,
       'id': id.current,
       rating,
-      'image': coverimage.asset->url
+      'image': coverimage.asset->url,
+      category[]->{
+        name
+      }
     }
   }
 `
-  return await client.fetch<TFeatured>(query, { foodcourt: foodcourt })
+  return await client.fetch<TFeatured[]>(query, { foodcourt: foodcourt })
 }

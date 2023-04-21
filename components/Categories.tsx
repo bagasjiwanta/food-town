@@ -24,7 +24,7 @@ export default function Categories({
 
   return (
     <View >
-      <Text style={font().s()} className="text-lg mt-4 pl-4">Categories</Text>
+      <Text style={font().semi().s()} className="text-lg mt-4 pl-4">Categories</Text>
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}

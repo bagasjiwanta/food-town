@@ -38,7 +38,7 @@ export default function CategoriesScreen({ navigation, route }: IProps) {
     }
 
     getRestaurants()
-  }, [])
+  }, [foodcourt])
 
 
   return (
@@ -56,7 +56,7 @@ export default function CategoriesScreen({ navigation, route }: IProps) {
                 {r.category.map(c => c.name).join(', ')}
               </Text>
               <View className='flex-row w-8 justify-between items-center'>
-                <AntDesign name="star" size={20} color="green" className='' /> 
+                <AntDesign name="star" size={20} color="orange" className='' /> 
                 <Text style={font().b().s()} className='pt-1'>
                   {r.rating}
                 </Text>

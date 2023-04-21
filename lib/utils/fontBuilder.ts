@@ -9,6 +9,7 @@ const Weights = {
 class Font {
   #weight: '300' | "400" | "500" | "600" | "700" = '400'
   #italic: boolean = false
+  #color: "#434343"
   i = () => {
     this.#italic = true
     return this
@@ -35,6 +36,9 @@ class Font {
       color: '#434343'
     }
   } 
+  nocolor = () => ({
+    fontFamily: `Poppins_${Weights[this.#weight]}${this.#italic ? '_Italic' : ''}`,
+  })
 }
 
 export const font = () => new Font()
