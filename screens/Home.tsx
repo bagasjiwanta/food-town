@@ -1,10 +1,18 @@
-import { SafeAreaView } from "react-native"
-import HomeHeader from "../components/HomeHeader"
+import { SafeAreaView, View } from 'react-native'
+import HomeHeader from '../components/HomeHeader'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import Categories from '../components/Categories'
 
-const HomeScreen = () => {
+const HomeScreen = ({
+  navigation,
+}: {
+  navigation: NativeStackNavigationProp<any>
+}) => {
+  console.log('hello')
   return (
-    <SafeAreaView className='pt-10 px-2'>
+    <SafeAreaView className="pt-10 px-2">
       <HomeHeader />
+      <Categories navigation={navigation} />
     </SafeAreaView>
   )
 }

@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'featured',
@@ -9,7 +9,7 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'id',
@@ -17,22 +17,22 @@ export default defineType({
       type: 'slug',
       options: {
         source: 'name',
-        maxLength: 96
+        maxLength: 96,
       },
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',
       title: 'Short Description',
       type: 'string',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'foodcourt',
       title: 'Food Court',
       type: 'reference',
-      to: [{ type: 'foodcourt' }],
-      validation: Rule => Rule.required()
+      to: [{type: 'foodcourt'}],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'restaurants',
@@ -43,11 +43,11 @@ export default defineType({
           type: 'reference',
           to: [
             {
-              type: 'restaurant'
-            }
-          ]
-        }
-      ]
-    })    
-  ]
+              type: 'restaurant',
+            },
+          ],
+        },
+      ],
+    }),
+  ],
 })

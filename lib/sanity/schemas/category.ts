@@ -16,14 +16,14 @@ export default defineType({
       type: 'slug',
       options: {
         source: 'name',
-        maxLength: 96
-      }
+        maxLength: 96,
+      },
     }),
     defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     }),
   ],
 })

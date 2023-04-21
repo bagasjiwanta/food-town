@@ -1,9 +1,8 @@
-import { client } from "./client"
-import { TFoodcourt } from "./types"
+import { client } from './client'
+import { TFoodcourt } from './types'
 
 export const getFoodcourts = async () => {
-  const query = 
-`
+  const query = `
 *[_type=='foodcourt'] {
   name,
   location,

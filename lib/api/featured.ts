@@ -1,9 +1,8 @@
-import { client } from "./client"
-import { TFeatured } from "./types"
+import { client } from './client'
+import { TFeatured } from './types'
 
 export const getFoodCourtFeatured = async (foodcourt: string) => {
-  const query = 
-`
+  const query = `
 *[
     _type == 'featured' 
     && foodcourt->id.current == $foodcourt

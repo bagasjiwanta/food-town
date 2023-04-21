@@ -1,11 +1,10 @@
-import { client } from "./client"
-import { TMenu } from "./types"
+import { client } from './client'
+import { TMenu } from './types'
 
 export const x = 10
 
 export const getRestaurantMenus = async (restaurant: string) => {
-	const query = 
-`
+  const query = `
 *[
   _type == 'menu'
   && restaurant->id.current == $restaurant
@@ -16,12 +15,11 @@ export const getRestaurantMenus = async (restaurant: string) => {
   "image": image.asset->url
 }
 `
-	return await client.fetch<TMenu>(query, { restaurant: restaurant })
+  return await client.fetch<TMenu>(query, { restaurant: restaurant })
 }
 
 export const getMenuDetails = async (menuId: string) => {
-	const query =
-`
+  const query = `
 *[
   _type == 'menu'
   && _id == $menuId
@@ -33,5 +31,5 @@ export const getMenuDetails = async (menuId: string) => {
   description
 }
 `
-	return await client.fetch<TMenu>(query, {menuId: menuId})
+  return await client.fetch<TMenu>(query, { menuId: menuId })
 }
