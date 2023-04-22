@@ -17,6 +17,7 @@ import {
   Poppins_700Bold_Italic,
 } from '@expo-google-fonts/poppins'
 import Navigations from './components/Navigations'
+import CartProvider from './components/CartProvider'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -30,13 +31,12 @@ export default function App() {
     Poppins_500Medium_Italic,
     Poppins_600SemiBold,
     Poppins_600SemiBold_Italic,
-    "Poppins_700Bold": Poppins_700Bold,
+    Poppins_700Bold,
     Poppins_700Bold_Italic,
   })
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-      console.log('async')
       await SplashScreen.hideAsync()
     }
   }, [fontsLoaded])
@@ -54,7 +54,9 @@ export default function App() {
       }}
     >
       <FoodcourtProvider>
-        <Navigations />
+        <CartProvider>
+          <Navigations />
+        </CartProvider>
       </FoodcourtProvider>
     </SafeAreaView>
   )

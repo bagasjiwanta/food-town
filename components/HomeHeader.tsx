@@ -21,7 +21,9 @@ const HomeHeader = () => {
         className="w-11 h-11"
       />
       <View>
-        <Text style={font().b().s()} className="text-lg">Food Town</Text>
+        <Text style={font().b().s()} className="text-lg">
+          Food Town
+        </Text>
         <View>
           {/* tombol dropdown */}
           <TouchableOpacity onPress={() => setOpen(!open)}>

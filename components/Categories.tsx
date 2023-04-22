@@ -23,8 +23,10 @@ export default function Categories({
   }, [])
 
   return (
-    <View >
-      <Text style={font().semi().s()} className="text-lg mt-4 pl-4">Categories</Text>
+    <View>
+      <Text style={font().semi().s()} className="text-lg mt-4 pl-4">
+        Categories
+      </Text>
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -35,7 +37,7 @@ export default function Categories({
             onPress={() =>
               navigation.navigate('Category', {
                 categoryId: c.id,
-                categoryName: c.name
+                categoryName: c.name,
               })
             }
             key={c.id}
@@ -45,7 +47,9 @@ export default function Categories({
               source={{ uri: url(c.image).width(120).height(120).url() }}
               className="h-[40px] w-[40px]"
             />
-            <Text style={font().s()} className="text-xs">{c.name}</Text>
+            <Text style={font().s()} className="text-xs">
+              {c.name}
+            </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>

@@ -3,13 +3,13 @@ const Weights = {
   '400': '400Regular',
   '500': '500Medium',
   '600': '600SemiBold',
-  '700': '700Bold'
+  '700': '700Bold',
 }
 
 class Font {
-  #weight: '300' | "400" | "500" | "600" | "700" = '400'
+  #weight: '300' | '400' | '500' | '600' | '700' = '400'
   #italic: boolean = false
-  #color: "#434343"
+  #color: '#434343'
   i = () => {
     this.#italic = true
     return this
@@ -32,12 +32,16 @@ class Font {
   }
   s = () => {
     return {
-      fontFamily: `Poppins_${Weights[this.#weight]}${this.#italic ? '_Italic' : ''}`,
-      color: '#434343'
+      fontFamily: `Poppins_${Weights[this.#weight]}${
+        this.#italic ? '_Italic' : ''
+      }`,
+      color: '#434343',
     }
-  } 
+  }
   nocolor = () => ({
-    fontFamily: `Poppins_${Weights[this.#weight]}${this.#italic ? '_Italic' : ''}`,
+    fontFamily: `Poppins_${Weights[this.#weight]}${
+      this.#italic ? '_Italic' : ''
+    }`,
   })
 }
 

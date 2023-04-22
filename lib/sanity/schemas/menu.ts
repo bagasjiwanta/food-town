@@ -36,5 +36,12 @@ export default defineType({
       to: [{type: 'restaurant'}],
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'menucategory',
+      title: 'Menu Category',
+      type: 'reference',
+      to: [{type: 'menucategory'}],
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 })

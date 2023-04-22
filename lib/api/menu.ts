@@ -1,21 +1,30 @@
 import { client } from './client'
-import { TMenu } from './types'
+import { TMenu, TMenuCategory } from './types'
 
 export const x = 10
 
-export const getRestaurantMenus = async (restaurant: string) => {
+export const getRestaurantMenus = async (restaurantId: string) => {
   const query = `
-*[
-  _type == 'menu'
-  && restaurant->id.current == $restaurant
-] {
-  "id": _id,
-  name,
-  price,
-  "image": image.asset->url
-}
+  *[
+    _type == 'menucategory'
+    && restaurant->id.current == $restaurant
+  ] {
+    "id": _id,
+    name,
+    "menus": *[
+      _type == 'menu'
+      && references(^._id)
+    ] {
+      "id": _id,
+      name,
+      price,
+      "image": image.asset->url
+    }
+  }
 `
-  return await client.fetch<TMenu>(query, { restaurant: restaurant })
+  return await client.fetch<TMenuCategory[]>(query, {
+    restaurant: restaurantId,
+  })
 }
 
 export const getMenuDetails = async (menuId: string) => {

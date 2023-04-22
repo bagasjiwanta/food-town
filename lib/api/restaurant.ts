@@ -38,7 +38,7 @@ export const getRestaurantDetails = async (restaurantId: string) => {
   "image": coverimage.asset->url,
   rating,
   description,
-}
+}[0]
 `
   return await client.fetch<TRestaurant>(query, { restaurantId })
 }

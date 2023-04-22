@@ -39,3 +39,9 @@ export type TFeatured = {
   foodcourt: TFoodcourt
   restaurants: TRestaurant[]
 }
+
+export type TMenuCategory = {
+  id: string
+  name: string
+  menus: TMenu[]
+}
