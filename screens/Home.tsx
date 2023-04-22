@@ -20,7 +20,7 @@ const HomeScreen = ({
           <Categories navigation={navigation} />
           <Featured />
           <TouchableHighlight
-            className="absolute bottom-0 w-full bg-white py-3"
+            className="mt-auto w-full bg-white py-3"
             onPress={() => navigation.navigate('Restaurants')}
             underlayColor="#efefef"
           >

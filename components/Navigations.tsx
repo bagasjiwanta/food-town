@@ -5,6 +5,8 @@ import CategoriesScreen from '../screens/Categories'
 import RestaurantScreen from '../screens/Restaurant'
 import { TMenu } from '../lib/api/types'
 import MenuScreen from '../screens/Menu'
+import CartScreen from '../screens/Cart'
+import RestaurantsScreen from '../screens/Restaurants'
 
 export type RootStackNavigations = {
   Home: undefined
@@ -17,7 +19,9 @@ export type RootStackNavigations = {
   },
   Menu: {
     menu: TMenu
-  }
+  },
+  Cart: undefined,
+  Restaurants: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackNavigations>()
@@ -31,9 +35,11 @@ export default function Navigations() {
           name="Home"
           component={HomeScreen}
         />
+        <Stack.Screen name="Restaurants" component={RestaurantsScreen} />
         <Stack.Screen name="Category" component={CategoriesScreen} />
         <Stack.Screen name="Restaurant" component={RestaurantScreen} />
         <Stack.Screen name="Menu" component={MenuScreen} />
+        <Stack.Screen name="Cart" component={CartScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

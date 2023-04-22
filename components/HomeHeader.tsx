@@ -3,6 +3,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   ScrollView,
   Pressable,
 } from 'react-native'
@@ -10,17 +11,20 @@ import { ChevronDownIcon, ChevronUpIcon } from 'react-native-heroicons/outline'
 import { useState } from 'react'
 import { useFoodcourt } from '../components/FoodcourtProvider'
 import { font } from '../lib/utils/fontBuilder'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'
 
 const HomeHeader = () => {
   const [open, setOpen] = useState<boolean>(false)
   const { foodcourt, setFoodcourt, foodcourts } = useFoodcourt()
+  const navigation = useNavigation()
   return (
-    <View className="flex-row space-x-3 pt-3 pl-4 pb-2 items-center bg-white">
+    <View className="flex-row space-x-3 pt-3 pl-4 pb-2 items-center w-full bg-white">
       <Image
         source={require('../assets/foodtown-logo.png')}
         className="w-11 h-11"
       />
-      <View>
+      <View className='flex-1'>
         <Text style={font().b().s()} className="text-lg">
           Food Town
         </Text>
@@ -58,6 +62,9 @@ const HomeHeader = () => {
           ) : null}
         </View>
       </View>
+      <TouchableOpacity  onPress={() => navigation.navigate("Cart")} className='items-end py-1 pl-1 pr-4'>
+        <MaterialCommunityIcons name="cart-variant" size={36} color="black" />     
+      </TouchableOpacity>
     </View>
   )
 }

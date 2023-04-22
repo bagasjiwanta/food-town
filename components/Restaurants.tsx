@@ -1,18 +1,23 @@
 import { TRestaurant } from '../lib/api/types'
-import { View, Image, Text, ScrollView } from 'react-native'
+import { View, Image, Text, ScrollView, TouchableHighlight } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { font } from '../lib/utils/fontBuilder'
 import { url } from '../lib/utils/imageUrlBuilder'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Restaurants({
   restaurants,
 }: {
   restaurants: TRestaurant[]
 }) {
+  const navigation = useNavigation()
+
   return (
     <ScrollView>
       {restaurants.map((r) => (
-        <View key={r.id} className={`flex-row space-x-4 bg-white py-3 pl-3`}>
+        <TouchableHighlight key={r.id} onPress={() => navigation.navigate("Restaurant", {restaurantId: r.id})}>
+
+        <View  className={`flex-row space-x-4 bg-white py-3 pl-3`}>
           <Image
             source={{ uri: url(r.image).width(300).height(300).url() }}
             className="w-[75px] h-[75px]"
@@ -36,6 +41,7 @@ export default function Restaurants({
             </View>
           </View>
         </View>
+        </TouchableHighlight>
       ))}
     </ScrollView>
   )

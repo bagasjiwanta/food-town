@@ -8,7 +8,8 @@ import {
 } from 'react'
 
 type TCartItem = {
-  qty: number
+  qty: number,
+  menu: TMenu
 }
 
 type TCart = {
@@ -41,6 +42,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     setCartItems({
       ...cartItems,
       [menu.id]: {
+        ...cartItems[menu.id],
         qty: (cartItems[menu.id].qty += 1),
       },
     })
@@ -53,11 +55,13 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       _setRestaurant(menu.restaurant.toString())
       const cartItem = {
         qty: 1,
+        menu
       }
       setCartItems({ [menu.id]: cartItem })
     } else {
       const cartItem = {
         qty: 1,
+        menu
       }
       setCartItems({ ...cartItems, [menu.id]: cartItem })
     }
@@ -67,6 +71,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     setCartItems({
       ...cartItems,
       [menu.id]: {
+        ...cartItems[menu.id],
         qty: (cartItems[menu.id].qty -= 1),
       },
     })

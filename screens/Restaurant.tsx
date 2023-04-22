@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { RouteProp, useNavigation } from '@react-navigation/native'
-import { useEffect, useState, memo } from 'react'
+import { useEffect, useState, memo, useMemo} from 'react'
 import { TMenu, TMenuCategory, TRestaurant } from '../lib/api/types'
 import { getRestaurantDetails } from '../lib/api/restaurant'
 import { getRestaurantMenus } from '../lib/api/menu'
@@ -26,12 +26,14 @@ export default function RestaurantScreen({ route }: IProps) {
   const restaurantId: string = route.params.restaurantId
   const [restaurant, setRestaurant] = useState<TRestaurant | null>(null)
   const [menuCategories, setMenuCategories] = useState<TMenuCategory[]>([])
+  const _getRestaurantDetails = useMemo(() => getRestaurantDetails(restaurantId), [restaurantId])
+  const _getRestaurantMenus = useMemo(() => getRestaurantMenus(restaurantId), [restaurantId])
 
   useEffect(() => {
     const getRestaurant = async () => {
       try {
-        const _restaurant = await getRestaurantDetails(restaurantId)
-        const _menus = await getRestaurantMenus(restaurantId)
+        const _restaurant = await _getRestaurantDetails
+        const _menus = await _getRestaurantMenus
         setRestaurant(_restaurant)
         setMenuCategories(_menus)
       } catch (err) {
