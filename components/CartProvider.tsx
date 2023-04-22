@@ -12,7 +12,7 @@ type TCartItem = {
 }
 
 type TCart = {
-  restaurant: TRestaurant | null
+  restaurant: string | null
   cartItems: {
     [key: string]: TCartItem
   }
@@ -35,7 +35,7 @@ export const useCart = () => useContext(CartContext)
 
 export default function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<{ [key: string]: TCartItem }>({})
-  const [restaurant, setRestaurant] = useState<TRestaurant | null>()
+  const [restaurant, _setRestaurant] = useState<string|null>()
 
   const increase = (menu: TMenu) => {
     setCartItems({
@@ -47,10 +47,20 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   }
 
   const add = (menu: TMenu) => {
-    const cartItem = {
-      qty: 1,
+    if(restaurant === null) {
+      _setRestaurant(menu.restaurant.toString())
+    } else if (restaurant !== menu.restaurant.toString()) {
+      _setRestaurant(menu.restaurant.toString())
+      const cartItem = {
+        qty: 1,
+      }
+      setCartItems({ [menu.id]: cartItem })
+    } else {
+      const cartItem = {
+        qty: 1,
+      }
+      setCartItems({ ...cartItems, [menu.id]: cartItem })
     }
-    setCartItems({ ...cartItems, [menu.id]: cartItem })
   }
 
   const decrease = (menu: TMenu) => {
@@ -77,7 +87,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         increase,
         decrease,
         add,
-        remove
+        remove,
       }}
     >
       {children}

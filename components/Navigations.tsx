@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/Home'
 import CategoriesScreen from '../screens/Categories'
 import RestaurantScreen from '../screens/Restaurant'
+import { TMenu } from '../lib/api/types'
+import MenuScreen from '../screens/Menu'
 
 export type RootStackNavigations = {
   Home: undefined
@@ -12,6 +14,9 @@ export type RootStackNavigations = {
   }
   Restaurant: {
     restaurantId: string
+  },
+  Menu: {
+    menu: TMenu
   }
 }
 
@@ -28,6 +33,7 @@ export default function Navigations() {
         />
         <Stack.Screen name="Category" component={CategoriesScreen} />
         <Stack.Screen name="Restaurant" component={RestaurantScreen} />
+        <Stack.Screen name="Menu" component={MenuScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

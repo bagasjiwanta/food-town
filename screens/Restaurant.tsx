@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native'
-import { RouteProp } from '@react-navigation/native'
+import { RouteProp, useNavigation } from '@react-navigation/native'
 import { useEffect, useState, memo } from 'react'
 import { TMenu, TMenuCategory, TRestaurant } from '../lib/api/types'
 import { getRestaurantDetails } from '../lib/api/restaurant'
@@ -26,14 +26,6 @@ export default function RestaurantScreen({ route }: IProps) {
   const restaurantId: string = route.params.restaurantId
   const [restaurant, setRestaurant] = useState<TRestaurant | null>(null)
   const [menuCategories, setMenuCategories] = useState<TMenuCategory[]>([])
-  const {
-    cartItems,
-    restaurant: cartRestaurant,
-    decrease,
-    increase,
-    add,
-    remove
-  } = useCart()
 
   useEffect(() => {
     const getRestaurant = async () => {
@@ -49,7 +41,8 @@ export default function RestaurantScreen({ route }: IProps) {
 
     getRestaurant()
   }, [restaurantId])
-
+  const navigation = useNavigation()
+  // console.log("page render")
   // console.log(restaurant)
   // console.log(menuCategories.map(mc => mc.menus.map(m => m.image)))
   return (
@@ -59,9 +52,9 @@ export default function RestaurantScreen({ route }: IProps) {
           <>
             <Image
               source={{
-                uri: url(restaurant.image).width(1200).height(720).url(),
+                uri: url(restaurant.image).width(1200).height(1200).url(),
               }}
-              className="w-full h-40 object-contain"
+              className="w-full h-40 object-contain bg-white "
               style={{
                 resizeMode: 'contain',
               }}
@@ -90,6 +83,7 @@ export default function RestaurantScreen({ route }: IProps) {
                     <MenuItem
                       menu={menu}
                       key={menu.id}
+                      navigation={navigation}
                     />
                   ))}
                 </View>
@@ -103,13 +97,20 @@ export default function RestaurantScreen({ route }: IProps) {
 }
 
 const MenuItem = memo(function MemoMenuItem(props: {
-  menu: TMenu
+  menu: TMenu,
+  navigation: any
 }) {
+  // console.log("menu item render" + props.menu.name)
   return (
-    <View key={props.menu.id} className="flex-row gap-x-2 w-full px-2 mt-2">
+    <TouchableHighlight
+      onPress={() => props.navigation.navigate("Menu", { menu: props.menu })}
+      underlayColor="#efefef"
+    >
+    <View
+      key={props.menu.id} className="flex-row gap-x-2 w-full px-2 mt-2">
       <View className="w-[100px] h-[100px] justify-center items-center ">
         <Image
-          source={{ uri: url(props.menu.image).width(255).height(255).url() }}
+          source={{ uri: url(props.menu.image).width(255).height(255).quality(50).url() }}
           className="w-[85px] h-[85px] rounded-md"
         />
       </View>
@@ -128,6 +129,7 @@ const MenuItem = memo(function MemoMenuItem(props: {
         </View>
       </View>
     </View>
+    </TouchableHighlight>
   )
 })
 

@@ -18,7 +18,8 @@ export const getRestaurantMenus = async (restaurantId: string) => {
       "id": _id,
       name,
       price,
-      "image": image.asset->url
+      "image": image.asset->url,
+      "restaurant": restaurant->id.current
     }
   }
 `
