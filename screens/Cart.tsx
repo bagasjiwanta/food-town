@@ -1,3 +1,4 @@
+import { toRupiah } from '../lib/utils/currency'
 import { useCart } from '../components/CartProvider'
 import { TMenu } from '../lib/api/types'
 import { font } from '../lib/utils/fontBuilder'
@@ -35,7 +36,7 @@ export default function CartScreen() {
           style={font().mid().nocolor()}
           className="p-5 flex-[2] text-lg text-white"
         >
-          Total: {countTotal()}
+          Total: {toRupiah(countTotal())}
         </Text>
         <TouchableHighlight
           underlayColor="#eeeeee"
@@ -68,14 +69,14 @@ function MenuItem(props: { menu: TMenu; qty: number }) {
         </Text>
         <View className="flex-row items-center justify-between">
           <Text style={font().mid().s()} className=" text-sm">
-            {props.menu.price}
+            {toRupiah(props.menu.price)}
           </Text>
           <View className="flex-row gap-x-4">
             <Text style={font().light().s()} className="text-sm">
               x {props.qty}
             </Text>
             <Text style={font().b().s()} className="text-sm">
-              {props.menu.price * props.qty}
+              {toRupiah(props.menu.price * props.qty)}
             </Text>
           </View>
         </View>

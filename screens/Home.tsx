@@ -13,7 +13,7 @@ const HomeScreen = ({
 }) => {
   const { foodcourt } = useFoodcourt()
   return (
-    <SafeAreaView className="pt-7 relative h-full">
+    <SafeAreaView className="relative h-full">
       <HomeHeader />
       {foodcourt ? (
         <>

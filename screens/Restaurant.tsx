@@ -5,10 +5,10 @@ import {
   View,
   Text,
   TouchableHighlight,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native'
 import { RouteProp, useNavigation } from '@react-navigation/native'
-import { useEffect, useState, memo, useMemo} from 'react'
+import { useEffect, useState, memo, useMemo } from 'react'
 import { TMenu, TMenuCategory, TRestaurant } from '../lib/api/types'
 import { getRestaurantDetails } from '../lib/api/restaurant'
 import { getRestaurantMenus } from '../lib/api/menu'
@@ -17,6 +17,7 @@ import Rating from '../components/Rating'
 import { useCart } from '../components/CartProvider'
 import { AntDesign } from '@expo/vector-icons'
 import { font } from '../lib/utils/fontBuilder'
+import { toRupiah } from '../lib/utils/currency'
 
 interface IProps {
   route: RouteProp<any>
@@ -26,8 +27,14 @@ export default function RestaurantScreen({ route }: IProps) {
   const restaurantId: string = route.params.restaurantId
   const [restaurant, setRestaurant] = useState<TRestaurant | null>(null)
   const [menuCategories, setMenuCategories] = useState<TMenuCategory[]>([])
-  const _getRestaurantDetails = useMemo(() => getRestaurantDetails(restaurantId), [restaurantId])
-  const _getRestaurantMenus = useMemo(() => getRestaurantMenus(restaurantId), [restaurantId])
+  const _getRestaurantDetails = useMemo(
+    () => getRestaurantDetails(restaurantId),
+    [restaurantId]
+  )
+  const _getRestaurantMenus = useMemo(
+    () => getRestaurantMenus(restaurantId),
+    [restaurantId]
+  )
 
   useEffect(() => {
     const getRestaurant = async () => {
@@ -99,72 +106,77 @@ export default function RestaurantScreen({ route }: IProps) {
 }
 
 const MenuItem = memo(function MemoMenuItem(props: {
-  menu: TMenu,
+  menu: TMenu
   navigation: any
 }) {
   // console.log("menu item render" + props.menu.name)
+  // console.log(toRupiah(10000))
   return (
     <TouchableHighlight
-      onPress={() => props.navigation.navigate("Menu", { menu: props.menu })}
+      onPress={() => props.navigation.navigate('Menu', { menu: props.menu })}
       underlayColor="#efefef"
     >
-    <View
-      key={props.menu.id} className="flex-row gap-x-2 w-full px-2 mt-2">
-      <View className="w-[100px] h-[100px] justify-center items-center ">
-        <Image
-          source={{ uri: url(props.menu.image).width(255).height(255).quality(50).url() }}
-          className="w-[85px] h-[85px] rounded-md"
-        />
-      </View>
-      <View className="flex-1 justify-between py-1 pl-2">
-        <Text style={font().mid().s()} className="text-[16px] max-w-[240px]">
-          {props.menu.name}
-        </Text>
-        <View className="flex-row justify-between items-center">
-          <View className='bg-blue-900 rounded-full p-1 mb-1'>
-
-            <Text style={font().nocolor()} className='text-white text-sm'>{props.menu.price}</Text>
-          </View>
-          <MenuAdder 
-            {...props}
+      <View key={props.menu.id} className="flex-row gap-x-2 w-full px-2 mt-2">
+        <View className="w-[100px] h-[100px] justify-center items-center ">
+          <Image
+            source={{
+              uri: url(props.menu.image)
+                .width(255)
+                .height(255)
+                .quality(50)
+                .url(),
+            }}
+            className="w-[85px] h-[85px] rounded-md"
           />
         </View>
+        <View className="flex-1 justify-between py-1 pl-2">
+          <Text style={font().mid().s()} className="text-[16px] max-w-[240px]">
+            {props.menu.name}
+          </Text>
+          <View className="flex-row justify-between items-center">
+            <View className="bg-blue-900 rounded-full p-1 mb-1">
+              <Text style={font().nocolor()} className="text-white text-sm">
+                {toRupiah(props.menu.price)}
+              </Text>
+            </View>
+            <MenuAdder {...props} />
+          </View>
+        </View>
       </View>
-    </View>
     </TouchableHighlight>
   )
 })
 
-function MenuAdder ({
-  menu,
-}: {
-  menu: TMenu
-}) {
-  const { cartItems, add, decrease, increase, remove} = useCart()
+function MenuAdder({ menu }: { menu: TMenu }) {
+  const { cartItems, add, decrease, increase, remove } = useCart()
   const qty = cartItems[menu.id]?.qty
   return (
     <View className="flex-row justify-between w-20">
-      <TouchableOpacity onPress={() => {
-        if (qty === undefined) {
-          return
-        } else if (qty === 1) {
-          remove(menu)
-        } else {
-          decrease(menu)
-        }
-      }}>
-        <AntDesign name="minuscircleo" size={24} color='gold' />
+      <TouchableOpacity
+        onPress={() => {
+          if (qty === undefined) {
+            return
+          } else if (qty === 1) {
+            remove(menu)
+          } else {
+            decrease(menu)
+          }
+        }}
+      >
+        <AntDesign name="minuscircleo" size={24} color="gold" />
       </TouchableOpacity>
       <Text style={font().s()} className="pt-1">
         {qty ?? 0}
       </Text>
-      <TouchableOpacity onPress={() => {
-        if (qty === undefined) {
-          add(menu)
-        } else {
-          increase(menu)
-        }
-      }}>
+      <TouchableOpacity
+        onPress={() => {
+          if (qty === undefined) {
+            add(menu)
+          } else {
+            increase(menu)
+          }
+        }}
+      >
         <AntDesign name="pluscircle" size={24} color="gold" />
       </TouchableOpacity>
     </View>

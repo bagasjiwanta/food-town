@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "prettify": "prettier --write .",
-    "build:android:apk": "eas: build -p android --profile preview"
+    "build:android:preview": "eas build -p android --profile preview"
   },
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.3",
@@ -23,6 +23,7 @@
     "expo-font": "~11.0.1",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
+    "intl": "^1.2.5",
     "jspdf": "^2.5.1",
     "nativewind": "^2.0.11",
     "react": "18.1.0",

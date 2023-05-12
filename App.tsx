@@ -1,4 +1,6 @@
 import 'react-native-url-polyfill/auto'
+import 'intl'
+// import 'intl/locale-data/jsonp/en'
 import FoodcourtProvider from './components/FoodcourtProvider'
 import * as SplashScreen from 'expo-splash-screen'
 import { useCallback } from 'react'
