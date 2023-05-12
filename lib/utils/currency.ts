@@ -1,2 +1,2 @@
 export const toRupiah = (number: number): string =>
-  'IDR ' + number.toLocaleString().replace(/,/g, '.')
+  'IDR ' + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
