@@ -39,7 +39,6 @@ export default function CategoriesScreen({ navigation, route }: IProps) {
           foodcourt.id
         )
         setRestaurants(_restaurants)
-        // console.log(restaurants)
       } catch (err) {
         console.warn(err)
       }

@@ -11,8 +11,9 @@ import { ChevronDownIcon, ChevronUpIcon } from 'react-native-heroicons/outline'
 import { useState } from 'react'
 import { useFoodcourt } from '../components/FoodcourtProvider'
 import { font } from '../lib/utils/fontBuilder'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import CartButton from './CartButton'
 
 const HomeHeader = () => {
   const [open, setOpen] = useState<boolean>(false)
@@ -24,7 +25,7 @@ const HomeHeader = () => {
         source={require('../assets/foodtown-logo.png')}
         className="w-11 h-11"
       />
-      <View className='flex-1'>
+      <View className="flex-1">
         <Text style={font().b().s()} className="text-lg">
           Food Town
         </Text>
@@ -62,9 +63,7 @@ const HomeHeader = () => {
           ) : null}
         </View>
       </View>
-      <TouchableOpacity  onPress={() => navigation.navigate("Cart")} className='items-end py-1 pl-1 pr-4'>
-        <MaterialCommunityIcons name="cart-variant" size={36} color="black" />     
-      </TouchableOpacity>
+      <CartButton />
     </View>
   )
 }

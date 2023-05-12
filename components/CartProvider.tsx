@@ -8,7 +8,7 @@ import {
 } from 'react'
 
 type TCartItem = {
-  qty: number,
+  qty: number
   menu: TMenu
 }
 
@@ -21,6 +21,7 @@ type TCart = {
   decrease: (menu: TMenu) => void
   add: (menu: TMenu) => void
   remove: (menu: TMenu) => void
+  count: number
 }
 
 const CartContext = createContext<TCart>({
@@ -30,13 +31,15 @@ const CartContext = createContext<TCart>({
   decrease: (_) => {},
   add: (_) => {},
   remove: (_) => {},
+  count: 0,
 })
 
 export const useCart = () => useContext(CartContext)
 
 export default function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<{ [key: string]: TCartItem }>({})
-  const [restaurant, _setRestaurant] = useState<string|null>()
+  const [restaurant, _setRestaurant] = useState<string | null>()
+  const count = Object.keys(cartItems).length
 
   const increase = (menu: TMenu) => {
     setCartItems({
@@ -49,19 +52,19 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   }
 
   const add = (menu: TMenu) => {
-    if(restaurant === null) {
+    if (restaurant === null) {
       _setRestaurant(menu.restaurant.toString())
     } else if (restaurant !== menu.restaurant.toString()) {
       _setRestaurant(menu.restaurant.toString())
       const cartItem = {
         qty: 1,
-        menu
+        menu,
       }
       setCartItems({ [menu.id]: cartItem })
     } else {
       const cartItem = {
         qty: 1,
-        menu
+        menu,
       }
       setCartItems({ ...cartItems, [menu.id]: cartItem })
     }
@@ -78,10 +81,9 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   }
 
   const remove = (menu: TMenu) => {
-    setCartItems({
-      ...cartItems,
-      [menu.id]: undefined,
-    })
+    const d = { ...cartItems }
+    delete d[menu.id]
+    setCartItems(d)
   }
 
   return (
@@ -93,6 +95,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         decrease,
         add,
         remove,
+        count,
       }}
     >
       {children}

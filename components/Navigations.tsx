@@ -7,6 +7,7 @@ import { TMenu } from '../lib/api/types'
 import MenuScreen from '../screens/Menu'
 import CartScreen from '../screens/Cart'
 import RestaurantsScreen from '../screens/Restaurants'
+import HeaderWithCart from './HeaderWithCart'
 
 export type RootStackNavigations = {
   Home: undefined
@@ -16,11 +17,11 @@ export type RootStackNavigations = {
   }
   Restaurant: {
     restaurantId: string
-  },
+  }
   Menu: {
     menu: TMenu
-  },
-  Cart: undefined,
+  }
+  Cart: undefined
   Restaurants: undefined
 }
 
@@ -37,7 +38,11 @@ export default function Navigations() {
         />
         <Stack.Screen name="Restaurants" component={RestaurantsScreen} />
         <Stack.Screen name="Category" component={CategoriesScreen} />
-        <Stack.Screen name="Restaurant" component={RestaurantScreen} />
+        <Stack.Screen
+          options={{ headerTitle: (props) => <HeaderWithCart {...props} /> }}
+          name="Restaurant"
+          component={RestaurantScreen}
+        />
         <Stack.Screen name="Menu" component={MenuScreen} />
         <Stack.Screen name="Cart" component={CartScreen} />
       </Stack.Navigator>
